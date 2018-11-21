@@ -292,6 +292,11 @@ module Kitchen
       state_file.read[:last_error]
     end
 
+    # Returns the specifig server_id from kitchen-ec2
+    def server_id
+      state_file.read[:server_id]
+    end
+
     # Clean up any per-instance resources before exiting.
     #
     # @return [void]

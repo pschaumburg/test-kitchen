@@ -49,7 +49,7 @@ module Kitchen
       # @return [String]
       # @api private
       def color_pad(string)
-        string + colorize("", :white)
+        if string.nil? then colorize("<Not Created>", :white) else string + colorize("", :white) end
       end
 
       # Generate the display rows for an instance.
@@ -66,6 +66,7 @@ module Kitchen
           color_pad(instance.transport.name),
           format_last_action(instance.last_action),
           format_last_error(instance.last_error),
+          color_pad(instance.server_id),
         ]
       end
 
@@ -107,7 +108,7 @@ module Kitchen
             colorize("Instance", :green), colorize("Driver", :green),
             colorize("Provisioner", :green), colorize("Verifier", :green),
             colorize("Transport", :green), colorize("Last Action", :green),
-            colorize("Last Error", :green)
+            colorize("Last Error", :green),colorize("Server ID", :green)
           ],
         ]
         table += Array(result).map { |i| display_instance(i) }
@@ -127,6 +128,7 @@ module Kitchen
           transport: result.transport.name,
           last_action: result.last_action,
           last_error: result.last_error,
+          server_id: result.server_id,
         }
       end
 
